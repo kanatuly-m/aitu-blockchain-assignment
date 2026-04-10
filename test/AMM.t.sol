@@ -103,7 +103,6 @@ contract AMMTest is Test {
         amm.addLiquidity(0, 100e18);
     }
 
-    // --- FUZZ TESTING ---
     function testFuzz_SwapOutput(uint256 amountIn) public {
         vm.assume(amountIn > 1000 && amountIn < 10e18);
         vm.prank(lpProvider);
