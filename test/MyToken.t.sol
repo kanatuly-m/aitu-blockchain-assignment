@@ -13,7 +13,6 @@ contract MyTokenTest is Test {
         token = new MyToken("MyToken", "MTK");
     }
 
-    // --- STANDARD UNIT TESTS ---
     function test_InitialSupply() public view {
         assertEq(token.totalSupply(), 1000000 * 10**18);
     }

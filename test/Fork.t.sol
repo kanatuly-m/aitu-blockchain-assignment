@@ -17,7 +17,6 @@ contract ForkTest is Test {
         mainnetFork = vm.createSelectFork(vm.envString("MAINNET_RPC_URL"));
     }
 
-    // Requirement: Read data from a real mainnet contract
     function test_ReadRealUSDCData() public view {
         IERC20 usdc = IERC20(USDC_ADDRESS);
         

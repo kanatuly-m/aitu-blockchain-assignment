@@ -22,7 +22,6 @@ contract AMM {
         lpToken = new LPToken();
     }
 
-    // --- Core Logic ---
 
     function getAmountOut(uint256 amountIn, bool isTokenA) public view returns (uint256 amountOut) {
         require(amountIn > 0, "Insufficient input amount");
@@ -82,8 +81,6 @@ contract AMM {
         _updateReserves();
         emit Swap(msg.sender, isTokenA ? address(tokenA) : address(tokenB), amountIn, amountOut);
     }
-
-    // --- Helpers ---
 
     function _updateReserves() private {
         reserveA = tokenA.balanceOf(address(this));

@@ -17,7 +17,6 @@ contract AMMTest is Test {
         tokenB = new MyToken("Token B", "TKB");
         amm = new AMM(address(tokenA), address(tokenB));
 
-        // Funding accounts
         tokenA.mint(lpProvider, 1000e18);
         tokenB.mint(lpProvider, 1000e18);
         tokenA.mint(swapper, 100e18);
@@ -34,7 +33,6 @@ contract AMMTest is Test {
         vm.stopPrank();
     }
 
-    // --- LIQUIDITY TESTS ---
     function test_InitialLiquidity() public {
         vm.prank(lpProvider);
         amm.addLiquidity(100e18, 100e18);
@@ -58,7 +56,6 @@ contract AMMTest is Test {
         assertEq(tokenA.balanceOf(lpProvider), 1000e18);
     }
 
-    // --- SWAP TESTS ---
     function test_SwapAtoB() public {
         vm.prank(lpProvider);
         amm.addLiquidity(100e18, 100e18);
@@ -78,7 +75,6 @@ contract AMMTest is Test {
         assertTrue(out > 0);
     }
 
-    // --- MATH & INVARIANTS ---
     function test_InvariantK_IncreasesDueToFees() public {
         vm.prank(lpProvider);
         amm.addLiquidity(100e18, 100e18);
@@ -91,7 +87,6 @@ contract AMMTest is Test {
         assertTrue(kAfter > kBefore, "K should increase due to 0.3% fee");
     }
 
-    // --- ERROR & EDGE CASES ---
     function test_SlippageProtection_Revert() public {
         vm.prank(lpProvider);
         amm.addLiquidity(100e18, 100e18);
